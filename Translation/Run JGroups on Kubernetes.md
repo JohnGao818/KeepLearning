@@ -168,3 +168,4 @@ received message from: jgroups-755dd4cbd9-s6br2-20315 with content: 9fbfe381-d9f
 # the second server only receives this message
 received message from: jgroups-755dd4cbd9-s6br2-20315 with content: 9fbfe381-d9f0-48ed-97a0-d78a150ad0ae
 ```
+原文链接https://koudingspawn.de/jgroups-on-kubernetes/
