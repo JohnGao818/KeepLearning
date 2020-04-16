@@ -37,15 +37,20 @@ function sumOfSquares(nums) {
 console.log(sumOfSquares([1, 2, 3, 4, 5]));
 ```
 这看起来很熟悉，我们用for循环所有的元素，计算平方然后放入一个新的数组。我们再用for循环这个新的数组计算和然后返回。尽管几乎所有人都可以理解它，这个方法确实还存在一些问题。
-它不太容易去读懂，你们团队的新成员可能需要花费一些时间来搞懂这段代码的含义。不要让我自己开始for循环，因为作为开发人员，我们一生中至少会遇到一次超出界限的错误。
-让我们看看用Clojure实现的命令式/函数式的方法：
-```clojure
-(defn square-of [n]
-  (* n n))
+它不太容易去读懂，你们团队的新成员可能需要花费一些时间来搞懂这段代码的含义。不要让我自己开始for循环，因为作为开发人员，你一定遇到过数组越界的情况。
+下面我们来将它重写一下：
+```javaScript
+function sumOfSquares2(nums) {
+  return nums
+    .map(function(num) { return num * num; })
+    .reduce(function(start, num) { return start + num; }, 0)
+  ;
+}
 
-(defn sum-of-squares [nums]
-  (reduce + (map #(square-of %) nums)))
-
-
-(sum-of-squares '(1 2 3 4 5))
+console.log(sumOfSquares([1, 2, 3, 4, 5]));
 ```
+我们以数组开始，通过链式调用Array.prototype.map和Array.prototype.reduce方法来返回结果。它不仅比声明式方法更加易读，而且更加简洁。更重要的是：我们只是在描述我们想要发生什么，而不是提供如何去做的细节。
+这就是我们整个的想法，我们不考虑for循环和索引，我们只关心两件事：
+1. 拿到每个数字计算它的平方。
+2. 计算所有平方的和。
+
