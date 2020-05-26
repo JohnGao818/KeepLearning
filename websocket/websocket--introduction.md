@@ -102,7 +102,7 @@ Sec-WebSocket-Accept计算过程为：
 在实际应用中，我们并不希望客户端不经过认证就对服务端建立连接。握手阶段采用http协议，可以携带cookie或者通过参数传递token。因此可以通过在握手阶段添加权限认证过程，使仅通过授权的客户端才能成功建立连接。
 
 #### demo
-下面是一个仿QQ聊天框实现的一个demo
+下面是一个仿QQ聊天框实现的一个demo，实际效果访问https://johngao818.github.io/website/websocket/simple-websocket-demo.html
 ```html
 <body>
 <div class="container">
