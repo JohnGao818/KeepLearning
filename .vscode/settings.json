@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "limits": "cpp"
+        "*.dbclient-js": "javascript",
+        "limits": "cpp",
+        "array": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "vector": "cpp"
     }
 }
