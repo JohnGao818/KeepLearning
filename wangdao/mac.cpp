@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <cstring>
+#include <cmath>
 
 #define MaxSize 50
 // 顺序表
@@ -85,19 +87,34 @@ void List_TailInsert(SeqList &L) {
     }
 }
 
-void DeleteElem(SeqList &L, int e)
+int FindMinDistance(SeqList &L, SeqList &M, SeqList &N)
 {
-    
+    int i = 0, j = 0, k = 0;
+    int temp;
+    int min = INT16_MAX;
+    while (i < L.length && j < M.length && k < N.length)
+    {
+        temp = abs(L.data[i] - M.data[j]) + abs(L.data[i] - N.data[k]) + abs(M.data[j] - N.data[k]);
+        if (temp < min) {
+            min = temp;
+        }
+        if (L.data[i] < M.data[j] && L.data[i] < N.data[k]) {
+            i++;
+        } else if (M.data[j] < L.data[i] && M.data[j] < N.data[k]) {
+            j++;
+        } else {
+            k++;
+        }
+    }
+    return min;
 }
 
 int main()
 {
-    int temp = 3;
     SeqList L;
     InitList(L);
     List_TailInsert(L);
     PrintList(L);
-    Reverse(L);
-    PrintList(L);
+    printf("%d", FindMinDistance(L));
     return 0;
 }

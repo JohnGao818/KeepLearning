@@ -5,6 +5,9 @@
         "array": "cpp",
         "string": "cpp",
         "string_view": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "ratio": "cpp",
+        "algorithm": "cpp",
+        "complex": "cpp"
     }
 }
