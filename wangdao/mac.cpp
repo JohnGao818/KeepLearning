@@ -3,110 +3,52 @@
 #include <cstring>
 #include <cmath>
 
-#define MaxSize 50
-// 顺序表
-typedef struct SeqList
+// 链式队列
+typedef struct LinkNode
 {
-    int data[MaxSize];
-    int length;
-} SeqList;
+    int data;
+    struct LinkNode *next;
+}LinkNode;
 
-void InitList(SeqList &L)
-{
-    L.length = 0;
+typedef struct {
+    LinkNode *front, *rear;
+}*LinkQueue;
+
+void InitQueue(LinkQueue &Q) {
+    Q->front = Q->rear = (LinkNode*)malloc(sizeof(LinkNode));
+    Q->front = NULL;
 }
 
-int Length(SeqList L)
-{
-    return L.length;
+bool QueueEmpty(LinkQueue Q) {
+    return Q->front == Q->rear;
 }
 
-int LocateElem(SeqList L, int e)
-{
-    for (int i = 0; i < L.length; i++)
-        if (L.data[i] == e)
-            return i + 1;
-    return 0;
-}
-
-int GetElem(SeqList L, int i)
-{
-    return L.data[i];
-}
-
-bool ListInsert(SeqList &L, int i, int e)
-{
-    if (i < 1 || i > L.length + 1)
-        return false;
-    if (L.length >= MaxSize)
-        return false;
-    for (int j = L.length; j >= i; j--)
-        L.data[j] = L.data[j - 1];
-    L.data[i - 1] = e;
-    L.length++;
+bool EnQueue(LinkQueue &Q, int x) {
+    LinkNode *p = (LinkNode*)malloc(sizeof(LinkNode));
+    p->data = x;
+    Q->rear->next = p;
+    Q->rear = p;
+    p->next = NULL;
     return true;
 }
 
-bool ListDelete(SeqList &L, int i, int &e)
-{
-    if (i < 1 || i > L.length + 1)
+bool DeQueue(LinkQueue &Q, int &x) {
+    if (QueueEmpty(Q))
         return false;
-    e = L.data[i - 1];
-    for (int j = i; j < L.length; j--)
-        L.data[j - 1] = L.data[j];
-    L.length--;
+    LinkNode *p = Q->front->next;
+    x = p->data;
+    Q->front->next = p->next;
+    if (Q->rear == p)
+        Q->rear = Q->front;
+    free(p);
     return true;
 }
 
-void PrintList(SeqList &L)
-{
-    for (int i = 0; i < L.length; i++) {
-        printf("%d, ", L.data[i]);
-    }
-    printf("\n");
-}
-
-bool Empty(SeqList L)
-{
-    return L.length == 0;
-}
-
-// 销毁线性表，释放线性表L所占用的内存空间
-void DestroyList(SeqList &L)
-{
-    L.length = 0;
-}
-
-void List_TailInsert(SeqList &L) {
-    int x;
-    scanf("%d", &x);
-    while (x != 9999)
-    {
-        L.data[L.length++] = x;
-        scanf("%d", &x);
-    }
-}
-
-int FindMinDistance(SeqList &L, SeqList &M, SeqList &N)
-{
-    int i = 0, j = 0, k = 0;
-    int temp;
-    int min = INT16_MAX;
-    while (i < L.length && j < M.length && k < N.length)
-    {
-        temp = abs(L.data[i] - M.data[j]) + abs(L.data[i] - N.data[k]) + abs(M.data[j] - N.data[k]);
-        if (temp < min) {
-            min = temp;
-        }
-        if (L.data[i] < M.data[j] && L.data[i] < N.data[k]) {
-            i++;
-        } else if (M.data[j] < L.data[i] && M.data[j] < N.data[k]) {
-            j++;
-        } else {
-            k++;
-        }
-    }
-    return min;
+bool GetHead(LinkQueue Q, int &x) {
+    if (QueueEmpty(Q))
+        return false;
+    x = Q->front->data;
+    return true;
 }
 
 int main()
