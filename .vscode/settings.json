@@ -8,6 +8,8 @@
         "vector": "cpp",
         "ratio": "cpp",
         "algorithm": "cpp",
-        "complex": "cpp"
+        "complex": "cpp",
+        "cmath": "cpp",
+        "cstring": "cpp"
     }
 }
