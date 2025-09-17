@@ -10,6 +10,11 @@
         "algorithm": "cpp",
         "complex": "cpp",
         "cmath": "cpp",
-        "cstring": "cpp"
+        "cstring": "cpp",
+        "bit": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "type_traits": "cpp",
+        "new": "cpp"
     }
 }

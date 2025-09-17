@@ -3,44 +3,36 @@
 #include <cstring>
 #include <cmath>
 
-// 顺序队列
-#define MaxSize 50
-typedef struct
+void CountSort(int a[], int b[], int n, int k) {
+    int c[k];
+    for(int i=0; i<k; i++)
+        c[i] = 0;
+    for(int i=1; i <= n; i++)
+        c[a[i]] += 1;
+    for(int i=0; i<k-1; i++)
+        c[i+1] += c[i];
+    for(int i=1; i <= n; i++){
+        b[c[a[i]]] = a[i];
+        c[a[i]] -= 1;
+    }
+}
+
+void Print(int a[], int n)
 {
-    int data[50];
-    int front, rear;
-}*SqQueue;
-
-void InitQueue(SqQueue &Q) {
-    Q->front = 0;
-    Q->rear = 0;
+    for (int i = 1; i < n + 1; i++)
+    {
+        printf("%d,", a[i]);
+    }
+    printf("\n");
 }
 
-bool QueueEmpty(SqQueue Q) {
-    return Q->front == Q->rear;
-}
-
-bool EnQueue(SqQueue &Q, int x) {
-    if (Q->rear == MaxSize)
-      return false;
-    Q->data[Q->rear++] = x;
-    return true;
-}
-
-bool DeQueue(SqQueue &Q, int &x) {
-    if (QueueEmpty(Q))
-        return false;
-    x = Q->data[Q->front++];
-    return true;
-}
-
-bool GetHead(SqQueue Q, int &x) {
-    if (QueueEmpty(Q))
-        return false;
-    x = Q->data[Q->front];
-    return true;
-}
 int main()
 {
-
+    int n = 10;
+    int a[n] = {0, 3, 9, 1, 2, 6, 8, 4, 5, 7};
+    int b[n];
+    Print(a, n - 1);
+    CountSort(a, b, n - 1, n);
+    Print(b, n - 1);
+    system("pause");
 }
